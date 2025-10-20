@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+.github
+
+# Documentation
+README.md
+*.md
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts (except target for multi-stage build)
+*.log
+*.tmp
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Maven wrapper (if not needed)
+.mvn/
+mvnw
+mvnw.cmd
+
+# Test files and reports
+target/surefire-reports/
+target/site/
+
+# Screenshots and documentation
+screenshots/
+requests.http
+*.postman_collection.json
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.swp
+*.swo
+*~

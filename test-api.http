@@ -1,0 +1,48 @@
+# Task API Testing - HTTP Requests
+# Use this file with REST Client extension in VS Code or similar tools
+
+### Health Check
+GET http://localhost:8080/actuator/health
+
+### Get all tasks
+GET http://localhost:8080/api/tasks
+
+### Create a new task
+PUT http://localhost:8080/api/tasks
+Content-Type: application/json
+
+{
+  "id": "test-001",
+  "name": "CI/CD Test Task",
+  "owner": "Pipeline Tester",
+  "command": "echo Hello from CI/CD Pipeline!"
+}
+
+### Get task by ID
+GET http://localhost:8080/api/tasks?id=test-001
+
+### Search tasks by name
+GET http://localhost:8080/api/tasks/search?name=CI/CD
+
+### Execute task command
+PUT http://localhost:8080/api/tasks/test-001/execute
+
+### Create another task for testing
+PUT http://localhost:8080/api/tasks
+Content-Type: application/json
+
+{
+  "id": "test-002",
+  "name": "Docker Test",
+  "owner": "Container Tester",
+  "command": "whoami"
+}
+
+### Get all tasks (should show both)
+GET http://localhost:8080/api/tasks
+
+### Delete a task
+DELETE http://localhost:8080/api/tasks/test-001
+
+### Verify deletion
+GET http://localhost:8080/api/tasks

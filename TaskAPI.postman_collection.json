@@ -1,0 +1,93 @@
+{
+  "info": {
+    "_postman_id": "b3e1c5d9-cc2d-4c0d-9c7c-000000000001",
+    "name": "Task API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create/Update Task",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/tasks",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"123\",\n  \"name\": \"Print Hello\",\n  \"owner\": \"John Smith\",\n  \"command\": \"echo Hello World again!\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get All Tasks",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/tasks",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"]
+        }
+      }
+    },
+    {
+      "name": "Get Task by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/tasks?id={{taskId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks"],
+          "query": [
+            { "key": "id", "value": "{{taskId}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Search by Name",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/tasks/search?name={{search}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "search"],
+          "query": [
+            { "key": "name", "value": "{{search}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Execute Task",
+      "request": {
+        "method": "PUT",
+        "url": {
+          "raw": "{{baseUrl}}/tasks/{{taskId}}/execute",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "{{taskId}}", "execute"]
+        }
+      }
+    },
+    {
+      "name": "Delete Task",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/tasks/{{taskId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["tasks", "{{taskId}}"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api" },
+    { "key": "taskId", "value": "123" },
+    { "key": "search", "value": "print" }
+  ]
+}

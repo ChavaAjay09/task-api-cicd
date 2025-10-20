@@ -1,0 +1,7 @@
+com\example\tasks\TaskApiApplication.class
+com\example\tasks\service\TaskService.class
+com\example\tasks\model\Task.class
+com\example\tasks\model\TaskExecution.class
+com\example\tasks\controller\TaskController.class
+com\example\tasks\repo\TaskRepository.class
+com\example\tasks\service\CommandValidator.class

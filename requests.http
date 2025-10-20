@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:8080/api
+@taskId = 123
+
+### Create/Update Task
+PUT {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "id": "{{taskId}}",
+  "name": "Print Hello",
+  "owner": "John Smith",
+  "command": "echo Hello World again!"
+}
+
+### Get All Tasks
+GET {{baseUrl}}/tasks
+
+### Get Task by ID
+GET {{baseUrl}}/tasks?id={{taskId}}
+
+### Search by Name
+GET {{baseUrl}}/tasks/search?name=print
+
+### Execute Task
+PUT {{baseUrl}}/tasks/{{taskId}}/execute
+
+### Delete Task
+DELETE {{baseUrl}}/tasks/{{taskId}}
