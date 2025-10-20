@@ -181,17 +181,26 @@ jobs:
     name: Deploy to Staging
     runs-on: ubuntu-latest
     needs: [docker-build, security-scan]
-    if: github.ref == 'refs/heads/develop'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
     environment: staging
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Prepare deploy tag
+      run: |
+        if [ "${GITHUB_REF_NAME}" = "main" ]; then
+          TAG="latest"
+        else
+          TAG="${GITHUB_REF_NAME}"
+        fi
+        echo "DEPLOY_TAG=${TAG}" >> $GITHUB_ENV
+
     - name: Deploy to staging
       run: |
         echo "Deploying to staging environment..."
-        echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:develop"
+        echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEPLOY_TAG }}"
         # Add your staging deployment commands here
         # Example: kubectl, docker-compose, or cloud provider CLI commands
 
@@ -199,17 +208,26 @@ jobs:
     name: Deploy to Production
     runs-on: ubuntu-latest
     needs: [docker-build, security-scan]
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
     environment: production
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Prepare deploy tag
+      run: |
+        if [ "${GITHUB_REF_NAME}" = "main" ]; then
+          TAG="latest"
+        else
+          TAG="${GITHUB_REF_NAME}"
+        fi
+        echo "DEPLOY_TAG=${TAG}" >> $GITHUB_ENV
+
     - name: Deploy to production
       run: |
         echo "Deploying to production environment..."
-        echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+        echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEPLOY_TAG }}"
         # Add your production deployment commands here
         # Example: kubectl, docker-compose, or cloud provider CLI commands
 
